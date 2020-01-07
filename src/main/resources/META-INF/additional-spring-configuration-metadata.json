@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "product-listing-root-uri",
+      "type": "java.lang.String",
+      "description": "Description for product-listing-root-uri."
+  }
+] }
