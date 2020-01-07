@@ -52,7 +52,4 @@ public class QueryModel {
     public Boolean getInStock() {
         return inStock;
     }
-
-    public void validate() {
-    }
 }
