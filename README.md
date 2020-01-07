@@ -36,6 +36,12 @@ docker build -t productsearch:0.0.3-SNAPSHOT .
 docker run -p 127.0.0.1:8080:8080/tcp productsearch:0.0.3-SNAPSHOT
 ```
 
+## Initializing the index
+
+Before you can search against the api you *must* issue a `PUT` request to `/indexer`.  When the api initially loads, the index is not initialized and calls to the search endpoint will result in 500 errors.
+
+## Postman
+
 To see the api in action there Postman examples here: 
 
 https://documenter.getpostman.com/view/5625699/SWLfaS7k?version=latest
