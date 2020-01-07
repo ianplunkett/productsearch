@@ -54,6 +54,9 @@ public class IndexerServiceImpl implements IndexerService {
     @Override
     public void fetchProductListing(ProductJSON productJSON) {
 
+        // Wipe the old product listings first
+        productRepository.deleteAll();
+
         if (productJSON == null) {
             // Default starting page and size
             int pageNumber = 1;
@@ -78,10 +81,14 @@ public class IndexerServiceImpl implements IndexerService {
         }
     }
 
-    // Retrieve locally cached Product Listings and build lucene index;
+    // Retrieve locally cached Product Listings and build Lucene index;
     @Override
     public int createIndex() throws IOException {
         Iterable<ProductModel> products = productRepository.findAll();
+
+        // Delete the old index first
+        indexWriter.deleteAll();
+        indexWriter.commit();
 
         log.info("Indexing Product Listing Records");
         int count = 0;
@@ -99,6 +106,7 @@ public class IndexerServiceImpl implements IndexerService {
         return count;
     }
 
+    // Create a Lucene Document to index
     private Document createDocument(ProductDocumentDto productDocumentDto) {
         Document document = documentObjectFactory.getObject();
         document.add(storedFieldObjectProvider.getObject(ProductFields.PRODUCT_ID, productDocumentDto.getProductId()));
@@ -110,6 +118,7 @@ public class IndexerServiceImpl implements IndexerService {
         return document;
     }
 
+    // Fetch product listings from a remote REST endpoint
     private ProductJSON fetchPage(Integer pageNumber, Integer pageSize) {
         String resourceUri = rootUri + "/" + pageNumber.toString() + "/" + pageSize.toString();
         return restTemplate.getForObject(resourceUri, ProductJSON.class);
