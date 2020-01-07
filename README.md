@@ -22,7 +22,7 @@ To build the project locally you need `gradle 4.10.2` and `java 1.8`
 At the root level of the project run 
 ```
 ./gradlew bootJar
-java -jar build/libs/productsearch-0.0.3-SNAPSHOT.jar
+java -jar build/libs/productsearch-0.0.4-SNAPSHOT.jar
 ```
 
 To run tests
