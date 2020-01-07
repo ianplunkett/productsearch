@@ -10,7 +10,6 @@ import java.util.UUID;
 public class ProductModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID productId;
 
     private String productName;
