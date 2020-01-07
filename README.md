@@ -32,8 +32,8 @@ To run tests
 
 To run the project as a docker container
 ```
-docker build -t productsearch:0.0.3-SNAPSHOT .
-docker run -p 127.0.0.1:8080:8080/tcp productsearch:0.0.3-SNAPSHOT
+docker build -t productsearch:0.0.4-SNAPSHOT .
+docker run -p 127.0.0.1:8080:8080/tcp productsearch:0.0.4-SNAPSHOT
 ```
 
 ## Initializing the index
