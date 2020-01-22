@@ -1,6 +1,6 @@
 package com.ianplunkett.productsearch.Service.Impl;
 
-import com.ianplunkett.productsearch.Model.ProductFields;
+import com.ianplunkett.productsearch.Model.ProductConstants;
 import com.ianplunkett.productsearch.Model.ProductJSON;
 import com.ianplunkett.productsearch.Model.ProductModel;
 import com.ianplunkett.productsearch.Model.QueryModel;
@@ -14,7 +14,6 @@ import org.apache.lucene.index.Term;
 import org.apache.lucene.queryparser.classic.ParseException;
 import org.apache.lucene.queryparser.classic.QueryParser;
 import org.apache.lucene.search.*;
-import org.aspectj.lang.annotation.After;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -61,7 +60,7 @@ public class SearchServiceImpl implements SearchService {
         List<ProductModel> productList = new ArrayList<>();
         for (ScoreDoc hit : hits) {
             Document document = indexSearcher.doc(hit.doc);
-            String productId = document.get(ProductFields.PRODUCT_ID);
+            String productId = document.get(ProductConstants.PRODUCT_ID);
             UUID uuid = UUID.fromString(productId);
             Optional<ProductModel> product = productRepository.findById(uuid);
             product.ifPresent(productList::add);
@@ -83,7 +82,7 @@ public class SearchServiceImpl implements SearchService {
     private void setInStock(Boolean inStock)  {
         if (inStock != null) {
             String queryString = inStock.toString();
-            Query query = new TermQuery(new Term(ProductFields.IN_STOCK, queryString));
+            Query query = new TermQuery(new Term(ProductConstants.IN_STOCK, queryString));
             builder.add(query, BooleanClause.Occur.FILTER);
         }
     }
@@ -97,7 +96,7 @@ public class SearchServiceImpl implements SearchService {
         if (maxReviewCount == null) {
             maxReviewCount = Integer.MAX_VALUE;
         }
-        Query reviewCount = IntPoint.newRangeQuery(ProductFields.REVIEW_COUNT, minReviewCount, maxReviewCount);
+        Query reviewCount = IntPoint.newRangeQuery(ProductConstants.REVIEW_COUNT, minReviewCount, maxReviewCount);
         builder.add(reviewCount, BooleanClause.Occur.FILTER);
     }
 
@@ -113,7 +112,7 @@ public class SearchServiceImpl implements SearchService {
         if (maxPrice != null) {
             maxPriceInt = MoneyConverter.dollarsStringToInteger(maxPrice);
         }
-        Query reviewCount = IntPoint.newRangeQuery(ProductFields.PRICE, minPriceInt, maxPriceInt);
+        Query reviewCount = IntPoint.newRangeQuery(ProductConstants.PRICE, minPriceInt, maxPriceInt);
         builder.add(reviewCount, BooleanClause.Occur.FILTER);
     }
 
@@ -136,7 +135,7 @@ public class SearchServiceImpl implements SearchService {
             maxReviewRating = Double.MAX_VALUE;
         }
 
-        Query reviewRating = DoublePoint.newRangeQuery(ProductFields.REVIEW_RATING, minReviewRating, maxReviewRating);
+        Query reviewRating = DoublePoint.newRangeQuery(ProductConstants.REVIEW_RATING, minReviewRating, maxReviewRating);
         builder.add(reviewRating, BooleanClause.Occur.FILTER);
     }
 }

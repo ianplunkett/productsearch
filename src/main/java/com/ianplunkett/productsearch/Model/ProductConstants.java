@@ -1,6 +1,9 @@
 package com.ianplunkett.productsearch.Model;
 
-public class ProductFields {
+public class ProductConstants {
+
+    // Query Strings
+    public static final String QUERY = "query";
 
     // Product Strings
     public static final String PRODUCT_ID = "productId";

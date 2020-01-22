@@ -1,0 +1,39 @@
+input SearchParams {
+    query: String
+    minPrice: String
+    maxPrice: String
+    minReviewRating: Float
+    maxReviewRating: Float
+    minReviewCount: Int
+    maxReviewCount: Int
+    inStock: Boolean
+}
+
+type ProductList {
+    products: [Product]
+    totalProducts: Int
+    pageNumber: Int
+    pageSize: Int
+    statusCode: Int
+    statusMessage: String
+}
+
+type Product {
+    productId: String
+    productName: String
+    shortDescription: String
+    longDescription: String
+    price: String
+    productImage: String
+    reviewRating: Float
+    reviewCount: Int
+    inStock: Boolean
+}
+
+type Query {
+    getProductSearch(searchParams: SearchParams): ProductList!
+}
+
+schema {
+    query: Query
+}

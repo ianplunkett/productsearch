@@ -1,6 +1,6 @@
 package com.ianplunkett.productsearch.Controller;
 
-import com.ianplunkett.productsearch.Model.ProductFields;
+import com.ianplunkett.productsearch.Model.ProductConstants;
 import com.ianplunkett.productsearch.Model.ProductJSON;
 import com.ianplunkett.productsearch.Model.QueryModel;
 import com.ianplunkett.productsearch.Model.QueryModelBuilder;
@@ -26,16 +26,16 @@ public class SearchController {
     @GetMapping("/search")
     public ProductJSON search(
             @RequestParam(value = "q", required = false) String q,
-            @RequestParam(value = ProductFields.MIN_PRICE, required = false) String minPrice,
-            @RequestParam(value = ProductFields.MAX_PRICE, required = false) String maxPrice,
-            @RequestParam(value = ProductFields.MIN_REVIEW_RATING, required = false) Double minReviewRating,
-            @RequestParam(value = ProductFields.MAX_REVIEW_RATING, required = false) Double maxReviewRating,
-            @RequestParam(value = ProductFields.MIN_REVIEW_COUNT, required = false) Integer minReviewCount,
-            @RequestParam(value = ProductFields.MAX_REVIEW_COUNT, required = false) Integer maxReviewCount,
-            @RequestParam(value = ProductFields.IN_STOCK, required = false) Boolean inStock)
+            @RequestParam(value = ProductConstants.MIN_PRICE, required = false) String minPrice,
+            @RequestParam(value = ProductConstants.MAX_PRICE, required = false) String maxPrice,
+            @RequestParam(value = ProductConstants.MIN_REVIEW_RATING, required = false) Double minReviewRating,
+            @RequestParam(value = ProductConstants.MAX_REVIEW_RATING, required = false) Double maxReviewRating,
+            @RequestParam(value = ProductConstants.MIN_REVIEW_COUNT, required = false) Integer minReviewCount,
+            @RequestParam(value = ProductConstants.MAX_REVIEW_COUNT, required = false) Integer maxReviewCount,
+            @RequestParam(value = ProductConstants.IN_STOCK, required = false) Boolean inStock)
             throws ParseException, IOException {
 
-        QueryModel queryModel = queryModelBuilder.setQ(q)
+        QueryModel queryModel = queryModelBuilder.setQuery(q)
                 .setMinPrice(minPrice)
                 .setMaxPrice(maxPrice)
                 .setMinReviewRating(minReviewRating)

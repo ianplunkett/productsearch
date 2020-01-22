@@ -1,7 +1,7 @@
 package com.ianplunkett.productsearch.Service.Impl;
 
+import com.ianplunkett.productsearch.Model.ProductConstants;
 import com.ianplunkett.productsearch.Model.ProductDocumentDto;
-import com.ianplunkett.productsearch.Model.ProductFields;
 import com.ianplunkett.productsearch.Model.ProductJSON;
 import com.ianplunkett.productsearch.Model.ProductModel;
 import com.ianplunkett.productsearch.Repository.ProductRepository;
@@ -109,12 +109,12 @@ public class IndexerServiceImpl implements IndexerService {
     // Create a Lucene Document to index
     private Document createDocument(ProductDocumentDto productDocumentDto) {
         Document document = documentObjectFactory.getObject();
-        document.add(storedFieldObjectProvider.getObject(ProductFields.PRODUCT_ID, productDocumentDto.getProductId()));
-        document.add(textFieldObjectProvider.getObject(ProductFields.PRODUCT_DESCRIPTION, productDocumentDto.getProductDescription()));
-        document.add(intPointObjectProvider.getObject(ProductFields.PRICE, productDocumentDto.getPrice()));
-        document.add(intPointObjectProvider.getObject(ProductFields.REVIEW_COUNT, productDocumentDto.getReviewCount()));
-        document.add(doublePointObjectProvider.getObject(ProductFields.REVIEW_RATING, productDocumentDto.getReviewRating()));
-        document.add(booleanFieldObjectProvider.getObject(ProductFields.IN_STOCK, productDocumentDto.getInStock()));
+        document.add(storedFieldObjectProvider.getObject(ProductConstants.PRODUCT_ID, productDocumentDto.getProductId()));
+        document.add(textFieldObjectProvider.getObject(ProductConstants.PRODUCT_DESCRIPTION, productDocumentDto.getProductDescription()));
+        document.add(intPointObjectProvider.getObject(ProductConstants.PRICE, productDocumentDto.getPrice()));
+        document.add(intPointObjectProvider.getObject(ProductConstants.REVIEW_COUNT, productDocumentDto.getReviewCount()));
+        document.add(doublePointObjectProvider.getObject(ProductConstants.REVIEW_RATING, productDocumentDto.getReviewRating()));
+        document.add(booleanFieldObjectProvider.getObject(ProductConstants.IN_STOCK, productDocumentDto.getInStock()));
         return document;
     }
 

@@ -11,7 +11,6 @@ public class IndexerController {
 
     final private IndexerService indexerService;
 
-
     public IndexerController(IndexerService indexerService) {
         this.indexerService = indexerService;
     }

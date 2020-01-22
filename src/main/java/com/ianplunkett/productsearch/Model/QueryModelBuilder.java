@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class QueryModelBuilder {
-    private String q;
+    private String query;
     private String minPrice;
     private String maxPrice;
     private Double minReviewRating;
@@ -13,8 +13,8 @@ public class QueryModelBuilder {
     private Integer maxReviewCount;
     private Boolean inStock;
 
-    public QueryModelBuilder setQ(String q) {
-        this.q = q;
+    public QueryModelBuilder setQuery(String query) {
+        this.query = query;
         return this;
     }
 
@@ -54,6 +54,6 @@ public class QueryModelBuilder {
     }
 
     public QueryModel createQueryModel() {
-        return new QueryModel(q, minPrice, maxPrice, minReviewRating, maxReviewRating, minReviewCount, maxReviewCount, inStock);
+        return new QueryModel(query, minPrice, maxPrice, minReviewRating, maxReviewRating, minReviewCount, maxReviewCount, inStock);
     }
 }
